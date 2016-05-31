@@ -16,9 +16,9 @@ namespace MvvmLightUwpExample.ViewModels
 
         public RelayCommand AddItemCommand { get; set; }
 
-        public MainPageViewModel(IItemsProvider itemsProvider/*, ViewModelLocator viewModelLocator*/)
+        public MainPageViewModel(IItemsProvider itemsProvider, ViewModelLocator viewModelLocator)
         {
-            //_viewModelLocator = viewModelLocator;
+            _viewModelLocator = viewModelLocator;
             itemsProvider.GetItems().ToList().ForEach(Items.Add);
 
             AddItemCommand = new RelayCommand(AddItem);

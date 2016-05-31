@@ -33,9 +33,9 @@ namespace MvvmLightUwpExample.ViewModels
 
         private void SetModalResultAndNavigateBack(bool result)
         {
-            _navigationService.GoBack();
-
             _modalTaskCompletionSource?.TrySetResult(result);
+
+            _navigationService.GoBack();
         }
 
         private void NavigatedFrom()
