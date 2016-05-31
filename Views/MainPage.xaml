@@ -27,7 +27,7 @@
                             <RowDefinition />
                             <RowDefinition />
                         </Grid.RowDefinitions>
-                        
+
                         <TextBlock Text="{Binding Title}" Grid.Row="0" VerticalAlignment="Bottom" />
                         <TextBlock Text="{Binding Subtitle}" Grid.Row="1" VerticalAlignment="Top" />
                     </Grid>
@@ -35,4 +35,16 @@
             </GridView.ItemTemplate>
         </GridView>
     </Grid>
+
+    <Page.BottomAppBar>
+        <AppBar ClosedDisplayMode="Compact">
+            <StackPanel Orientation="Horizontal">
+                <AppBarButton IsCompact="True" Command="{Binding AddItemCommand}">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xE710;" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+            </StackPanel>
+        </AppBar>
+    </Page.BottomAppBar>
 </Page>

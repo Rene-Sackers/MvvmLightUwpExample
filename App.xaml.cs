@@ -1,8 +1,8 @@
 ﻿using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Cimbalino.Toolkit.Controls;
 
@@ -30,7 +30,7 @@ namespace MvvmLightUwpExample
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            var rootFrame = Window.Current.Content as Frame;
+            var rootFrame = Window.Current.Content as HamburgerFrame;
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
@@ -45,6 +45,9 @@ namespace MvvmLightUwpExample
                     },
                     Pane = new Views.HamburgerMenu()
                 };
+                rootFrame.Navigated += RootFrame_Navigated;
+                SystemNavigationManager.GetForCurrentView().BackRequested +=OnBackRequested;
+                UpdateBackButton(rootFrame);
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
@@ -70,6 +73,29 @@ namespace MvvmLightUwpExample
             Window.Current.Activate();
         }
 
+        private void RootFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+            var frame = (HamburgerFrame) sender;
+
+            UpdateBackButton(frame);
+        }
+
+        private static void UpdateBackButton(HamburgerFrame frame)
+        {
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = frame.CanGoBack
+                ? AppViewBackButtonVisibility.Visible
+                : AppViewBackButtonVisibility.Collapsed;
+        }
+
+        private void OnBackRequested(object sender, BackRequestedEventArgs backRequestedEventArgs)
+        {
+            var frame = Window.Current.Content as HamburgerFrame;
+            if (frame?.CanGoBack != true) return;
+
+            backRequestedEventArgs.Handled = true;
+            frame.GoBack();
+        }
+
         /// <summary>
         /// Invoked when Navigation to a certain page fails
         /// </summary>
@@ -93,5 +119,7 @@ namespace MvvmLightUwpExample
             //TODO: Save application state and stop any background activity
             deferral.Complete();
         }
+
+        
     }
 }
