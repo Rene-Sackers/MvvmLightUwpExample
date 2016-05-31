@@ -1,9 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
-using MvvmLightUwpExample.Extensions;
+using MvvmLightUwpExample.Helpers.Extensions;
 using MvvmLightUwpExample.Models;
 using MvvmLightUwpExample.Views;
 

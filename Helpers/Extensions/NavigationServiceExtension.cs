@@ -1,7 +1,7 @@
 ﻿using System;
 using GalaSoft.MvvmLight.Views;
 
-namespace MvvmLightUwpExample.Extensions
+namespace MvvmLightUwpExample.Helpers.Extensions
 {
     public static class NavigationServiceExtension
     {

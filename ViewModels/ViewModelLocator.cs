@@ -1,7 +1,10 @@
-﻿using GalaSoft.MvvmLight.Ioc;
+﻿using System;
+using System.Linq;
+using System.Reflection;
+using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
-using MvvmLightUwpExample.Extensions;
-using MvvmLightUwpExample.Services;
+using MvvmLightUwpExample.Helpers.Attributes;
+using MvvmLightUwpExample.Helpers.Extensions;
 using MvvmLightUwpExample.Services.Interfaces;
 using MvvmLightUwpExample.Views;
 
@@ -16,16 +19,9 @@ namespace MvvmLightUwpExample.ViewModels
         public ViewModelLocator()
         {
             SimpleIoc.Default.Register(() => this);
-            SimpleIoc.Default.Register<INavigationService>(CreateNavigationService);
+            SimpleIoc.Default.Register(CreateNavigationService);
 
-            if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
-            {
-                SimpleIoc.Default.Register<IItemsProvider, Services.Design.ItemsProvider>();
-            }
-            else
-            {
-                SimpleIoc.Default.Register<IItemsProvider, ItemsProvider>();
-            }
+            RegisterService<IItemsProvider>();
 
             SimpleIoc.Default.Register<MainPageViewModel>();
             SimpleIoc.Default.Register<EditItemPageViewModel>();
@@ -39,6 +35,20 @@ namespace MvvmLightUwpExample.ViewModels
             navigationService.Configure(typeof(EditItemPage));
 
             return navigationService;
+        }
+        private void RegisterService<T>() where T : class
+        {
+            var type = typeof(T);
+
+            var dependencyInformationAttribute = type.GetTypeInfo().GetCustomAttributes().OfType<DependencyInformationAttribute>().FirstOrDefault();
+
+            if (dependencyInformationAttribute == null)
+                throw new InvalidOperationException($"Tried to register service {type.FullName}, but it has no {nameof(DependencyInformationAttribute)}.");
+
+            if (dependencyInformationAttribute.DesigntimeImplementation != null && Windows.ApplicationModel.DesignMode.DesignModeEnabled)
+                SimpleIoc.Default.Register(() => (T)Activator.CreateInstance(dependencyInformationAttribute.DesigntimeImplementation));
+            else
+                SimpleIoc.Default.Register(() => (T)Activator.CreateInstance(dependencyInformationAttribute.RuntimeImplementation));
         }
     }
 }
