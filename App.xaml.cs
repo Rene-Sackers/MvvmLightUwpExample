@@ -4,6 +4,7 @@ using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using Cimbalino.Toolkit.Controls;
 
 namespace MvvmLightUwpExample
 {
@@ -29,12 +30,6 @@ namespace MvvmLightUwpExample
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-#if DEBUG
-            if (System.Diagnostics.Debugger.IsAttached)
-            {
-                DebugSettings.EnableFrameRateCounter = true;
-            }
-#endif
             var rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
@@ -42,7 +37,14 @@ namespace MvvmLightUwpExample
             if (rootFrame == null)
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
-                rootFrame = new Frame();
+                rootFrame = new HamburgerFrame
+                {
+                    Header = new HamburgerTitleBar
+                    {
+                        Title = "MVVM Light UWP Example"
+                    },
+                    Pane = new Views.HamburgerMenu()
+                };
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
