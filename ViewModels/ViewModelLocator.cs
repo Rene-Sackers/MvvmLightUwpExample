@@ -5,6 +5,7 @@ using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
 using MvvmLightUwpExample.Helpers.Attributes;
 using MvvmLightUwpExample.Helpers.Extensions;
+using MvvmLightUwpExample.Services;
 using MvvmLightUwpExample.Services.Interfaces;
 using MvvmLightUwpExample.Views;
 
@@ -18,10 +19,19 @@ namespace MvvmLightUwpExample.ViewModels
         
         public ViewModelLocator()
         {
-            SimpleIoc.Default.Register(() => this);
-            SimpleIoc.Default.Register(CreateNavigationService);
+            if (!Windows.ApplicationModel.DesignMode.DesignModeEnabled)
+            {
+                SimpleIoc.Default.Register(() => this);
+                SimpleIoc.Default.Register(CreateNavigationService);
 
-            RegisterService<IItemsProvider>();
+                SimpleIoc.Default.Register<IItemsProvider, ItemsProvider>();
+            }
+            else
+            {
+                SimpleIoc.Default.Register<IItemsProvider, Services.Design.ItemsProvider>();
+            }
+
+            //RegisterService<IItemsProvider>();
 
             SimpleIoc.Default.Register<MainPageViewModel>();
             SimpleIoc.Default.Register<EditItemPageViewModel>();
