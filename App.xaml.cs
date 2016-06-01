@@ -46,7 +46,6 @@ namespace MvvmLightUwpExample
                     Pane = new Views.HamburgerMenu()
                 };
                 rootFrame.Navigated += RootFrame_Navigated;
-                rootFrame.NavigationFailed += RootFrameOnNavigationFailed;
                 SystemNavigationManager.GetForCurrentView().BackRequested +=OnBackRequested;
                 UpdateBackButton(rootFrame);
 
@@ -72,11 +71,6 @@ namespace MvvmLightUwpExample
             }
             // Ensure the current window is active
             Window.Current.Activate();
-        }
-
-        private void RootFrameOnNavigationFailed(object sender, NavigationFailedEventArgs navigationFailedEventArgs)
-        {
-            
         }
 
         private void RootFrame_Navigated(object sender, NavigationEventArgs e)
