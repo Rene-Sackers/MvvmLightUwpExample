@@ -25,5 +25,5 @@ Main page
 Edit/create page
 ![edit/create page](http://i.imgur.com/fP2PtEX.png)
 
-Somehow managed to get it to work in design-timer
+Somehow managed to get it to work in design-time
 ![design time](http://i.imgur.com/riaX17k.png)
