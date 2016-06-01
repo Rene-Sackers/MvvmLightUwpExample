@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.ComponentModel;
+using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
@@ -14,7 +15,19 @@ namespace MvvmLightUwpExample.ViewModels
 
         private TaskCompletionSource<bool> _modalTaskCompletionSource;
 
-        public Item Item { get; set; } = new Item();
+        private Item _item = new Item();
+
+        public Item Item
+        {
+            get { return _item; }
+            set
+            {
+                if (Item == value) return;
+
+                _item = value;
+                RaisePropertyChanged();
+            }
+        }
 
         public RelayCommand OkCommand { get; }
 

@@ -12,9 +12,20 @@ namespace MvvmLightUwpExample.ViewModels
         public MainPageViewModel MainPage => SimpleIoc.Default.GetInstance<MainPageViewModel>();
 
         public EditItemPageViewModel EditItemPage => SimpleIoc.Default.GetInstance<EditItemPageViewModel>();
+
+        private static bool _isInitialized;
         
         public ViewModelLocator()
         {
+            // Fix for design time
+            if (_isInitialized)
+                return;
+            _isInitialized = true;
+
+            SimpleIoc.Default.Register(() => this);
+            
+            SimpleIoc.Default.Register(CreateNavigationService);
+
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
             {
                 RegisterDesignTimeServices();
@@ -30,16 +41,11 @@ namespace MvvmLightUwpExample.ViewModels
 
         private static void RegisterDesignTimeServices()
         {
-            SimpleIoc.Default.Register<ViewModelLocator>();
-
             SimpleIoc.Default.Register<IItemsProvider, Services.Design.ItemsProvider>();
         }
 
-        private void RegisterRuntimeServices()
+        private static void RegisterRuntimeServices()
         {
-            SimpleIoc.Default.Register(() => this);
-            SimpleIoc.Default.Register(CreateNavigationService);
-
             SimpleIoc.Default.Register<IItemsProvider, ItemsProvider>();
         }
 

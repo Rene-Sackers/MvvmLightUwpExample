@@ -11,21 +11,21 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel>
             <TextBlock Text="Title" />
-            <TextBox Text="{Binding Item.Title}" />
+            <TextBox Text="{Binding Item.Title, Mode=TwoWay}" />
             <TextBlock Text="Subtitle" />
-            <TextBox Text="{Binding Item.Subtitle}" />
+            <TextBox Text="{Binding Item.Subtitle, Mode=TwoWay}" />
         </StackPanel>
     </Grid>
     
     <Page.BottomAppBar>
         <AppBar ClosedDisplayMode="Compact">
             <StackPanel Orientation="Horizontal">
-                <AppBarButton IsCompact="True" Command="{Binding OkCommand, Mode=TwoWay}">
+                <AppBarButton IsCompact="True" Command="{Binding OkCommand}">
                     <AppBarButton.Icon>
                         <FontIcon Glyph="&#xE8FB;"/>
                     </AppBarButton.Icon>
                 </AppBarButton>
-                <AppBarButton IsCompact="True" Command="{Binding CancelCommand, Mode=TwoWay}">
+                <AppBarButton IsCompact="True" Command="{Binding CancelCommand}">
                     <AppBarButton.Icon>
                         <FontIcon Glyph="&#xE711;"/>
                     </AppBarButton.Icon>

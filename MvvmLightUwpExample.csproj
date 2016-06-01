@@ -97,6 +97,7 @@
     </Compile>
     <Compile Include="Helpers\Extensions\NavigationServiceExtension.cs" />
     <Compile Include="Helpers\Extensions\TypeExtensions.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Services\Design\ItemsProvider.cs" />
     <Compile Include="Services\Interfaces\IItemsProvider.cs" />
     <Compile Include="Models\Item.cs" />

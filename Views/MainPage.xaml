@@ -8,7 +8,7 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <GridView ItemsSource="{Binding Items}">
+        <GridView ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
             <GridView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <VariableSizedWrapGrid Orientation="Horizontal" ItemWidth="300" ItemHeight="150" />
@@ -42,6 +42,16 @@
                 <AppBarButton IsCompact="True" Command="{Binding AddItemCommand}">
                     <AppBarButton.Icon>
                         <FontIcon Glyph="&#xE710;" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton IsCompact="True" Command="{Binding EditSelectedItemCommand}">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xE70F;" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton IsCompact="True" Command="{Binding DeleteSelectedItemCommand}">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xE74D;" />
                     </AppBarButton.Icon>
                 </AppBarButton>
             </StackPanel>

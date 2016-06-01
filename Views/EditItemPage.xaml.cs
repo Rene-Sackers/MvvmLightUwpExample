@@ -15,6 +15,8 @@ namespace MvvmLightUwpExample.Views
         {
             // TODO: Are we allowed to do this?
             SimpleIoc.Default.GetInstance<ViewModelLocator>().EditItemPage.NotifyNavigatedFrom?.Execute(null);
+
+            base.OnNavigatedFrom(e);
         }
     }
 }
