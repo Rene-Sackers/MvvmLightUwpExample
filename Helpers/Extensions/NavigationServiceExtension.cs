@@ -7,10 +7,8 @@ namespace MvvmLightUwpExample.Helpers.Extensions
     {
         public static void NavigateTo(this INavigationService navigationService, Type pageType, object parameter = null)
         {
-            if (parameter == null)
-                navigationService.NavigateTo(pageType.FullName);
-            else
-                navigationService.NavigateTo(pageType.FullName, parameter);
+            if (parameter == null) navigationService.NavigateTo(pageType.FullName);
+            else navigationService.NavigateTo(pageType.FullName, parameter);
         }
 
         public static void Configure(this NavigationService navigationService, Type pageType)
