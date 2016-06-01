@@ -96,7 +96,6 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Extensions\NavigationServiceExtension.cs" />
-    <Compile Include="Helpers\Extensions\TypeExtensions.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Services\Design\ItemsProvider.cs" />
     <Compile Include="Services\Interfaces\IItemsProvider.cs" />
@@ -120,6 +119,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="README.md" />
     <None Include="UwpTest_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
